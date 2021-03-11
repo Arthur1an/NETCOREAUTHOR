@@ -1,0 +1,50 @@
+@using Soit.Authentication.Protos;
+@{
+    ViewBag.Title = "Login";
+    //var model = ViewData["result"] as LoginReply;
+}
+
+<link href="~/css/Login.css" rel="stylesheet" type="text/css" />
+<script>
+    function login() {
+        var UserName = $("#UserName").val();
+        var Cipher = $("#Cipher").val();
+        $.ajax({
+            url: "/authenticate/Login",
+            type: "get",
+            contentType: "application/json",
+            dataType: "text",
+            data: { "UserName": UserName, "Cipher": Cipher },
+            success: function (result, status) {
+                console.log(result);
+                if (typeof result == "undefined" || result == null || result == "") {
+                    alert("error")
+                } else {
+                    alert("success")
+                    window.location.href = 'https://www.baidu.com/';
+                }
+            },
+            error: function (error) {
+                alert(error);
+            }
+        })
+    }
+</script>
+@*<body>
+    <div id="login">
+        <h1>Login</h1>
+        <input type="text" required="required" placeholder="用户名" name="UserName" id="UserName">
+        <input type="password" required="required" placeholder="密码" name="Cipher" id="Cipher">
+        <button class="but" type="submit" onclick="login()">登录</button>
+    </div>
+</body>*@
+<body>
+    <div id="login">
+        <h1>Login</h1>
+        <form method="post" action="/authenticate/Login">
+            <input type="text" required="required" placeholder="用户名" name="UserName" id="UserName">
+            <input type="password" required="required" placeholder="密码" name="Cipher" id="Cipher">
+            <button class="but" type="submit">登录</button>
+        </form>
+    </div>
+</body>
