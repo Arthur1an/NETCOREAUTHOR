@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "Protos/infrastructure.proto";
+
+option csharp_namespace = "Soit.Authentication.Protos";
+
+package Soit.Authentication;
+
+service AuthenticateService {
+  rpc Login (LoginRequest) returns (LoginReply);
+  rpc Logout (google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc TokenRefresh (google.protobuf.Empty) returns (TokenRefreshReply);
+}
+
+message LoginRequest {
+  string userName = 1;
+  string cipher = 2;
+}
+
+message LoginReply {
+  string userId = 1;
+  //2021/3/9 update
+  google.protobuf.StringValue legalName = 2;
+  string token = 3;
+  google.protobuf.Timestamp expireAt = 4;
+}
+
+message TokenRefreshReply{
+  string userId = 1;
+  //2021/3/9 update
+  google.protobuf.StringValue legalName = 2;
+  string token = 3;
+  google.protobuf.Timestamp expireAt = 4;
+}

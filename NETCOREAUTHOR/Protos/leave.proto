@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option csharp_namespace = "leaveDemo";
+
+package leaveDemo;
+
+// The greeting service definition.
+service leave {
+   // Sends a greeting
+  rpc  GetUserInfoList(GetUserInfoRequest) returns (GetUserInfoListResponse);
+  rpc  GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
+  rpc  Apply(ApplyRequest) returns (ResponseMessage);
+  rpc  Approve(ApproveRequest) returns (ResponseMessage);
+}
+message GetUserInfoRequest {
+  string name = 1;
+}
+message ApproveRequest {
+  string Approve = 1;
+  string Apply=2;
+}
+// The request message
+message ApplyRequest {
+  string name = 1;
+  string startDate=2;
+  string endDate=3;
+  string leaveType=4;
+}
+// The response message
+message ResponseMessage {
+  string message = 1;
+}
+message GetUserInfoResponse {
+  string name = 1;
+  string age=2;
+  string gender=3;
+  string phone=4;
+  string email=5;
+}
+message List {
+  string name = 1;
+  string startDate=2;
+  string endDate=3;
+  string leaveType=4;
+}
+// The response messages
+message GetUserInfoListResponse {
+ repeated List messages = 1;
+}
+

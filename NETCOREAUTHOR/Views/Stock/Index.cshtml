@@ -1,0 +1,31 @@
+@using Soit.Authentication.Protos;
+@{
+    var model = ViewData["result"] as LoginReply;
+}
+
+
+<p>UserId:@ViewBag.UserId</p>
+<p>LegalName:@ViewBag.LegalName</p>
+<p>ExpireAt:@ViewBag.ExpireAt</p>
+<p>Token:@ViewBag.Token</p>
+
+<table style="border:1px solid #ff0000;border-collapse:collapse;width:40%;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>TOKEN</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+
+        <tr>
+            <td> model.UserId</td>
+            <td> model.LegalName</td>
+            <td> model.Token</td>
+        </tr>
+
+    </tbody>
+
+</table>

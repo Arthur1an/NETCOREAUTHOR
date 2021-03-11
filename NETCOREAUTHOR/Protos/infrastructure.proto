@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+option csharp_namespace = "Soit.Infrastructure";
+
+package Soit.Infrastructure;
+
+enum EntityStates {
+    Enable = 0;
+    Disable = 1;
+}
+
+enum ElementTypes {
+    Button = 0;
+    Menu = 1;
+}
+
+message PageRequest {
+  int32 page = 1; //第几页
+  int32 pageSize = 2; //每页行数
+}
+
+message PageResult {
+  int32 page = 1; //当前页
+  int32 pageSize = 2; //每页行数
+  int32 pageCount = 3; //总页数
+  int32 rowCount = 4; //总行数
+  int32 firstRow = 5; //当前页首行
+  int32 lastRow = 6; //当前页末行
+}
+
+message OrderRequest {
+  string orderBy = 1; //排序列名
+  bool descending = 2; //是否降序
+}
