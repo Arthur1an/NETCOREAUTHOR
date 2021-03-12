@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "Protos/infrastructure.proto";
+
+option csharp_namespace = "Soit.Authentication.Protos";
+
+package Soit.Authentication;
+
+service ModuleService {
+  rpc Create (CreateModuleRequest) returns (google.protobuf.StringValue);
+  rpc Remove (RemoveModuleRequest) returns (google.protobuf.Empty);
+  rpc Update (UpdateModuleRequest) returns (google.protobuf.Empty);
+  rpc GetTree (google.protobuf.Empty) returns (GetModuleTreeReply);
+  
+  rpc Find (google.protobuf.StringValue) returns (FindModuleReply);
+}
+
+message CreateModuleRequest
+{
+  google.protobuf.StringValue parentId = 1;
+  string name = 2;
+  int32 no = 3;
+  string style = 4;
+  string icon = 5;
+  string route = 6;
+  bool showInMenu = 7;
+}
+
+message RemoveModuleRequest{
+  repeated string ids = 1;
+}
+
+message UpdateModuleRequest{
+  string id = 1;
+  google.protobuf.StringValue parentId = 2;
+  string name = 3;
+  int32 no = 4;
+  string style = 5;
+  string icon = 6;
+  string route = 7;
+  bool showInMenu = 8;
+}
+
+message ModuleTreeNode{
+  message ParentModuleTreeNode{
+    string id = 1;
+    string name = 2;
+  }
+  message Page{
+    string id = 1;
+    string key = 2;
+    string name = 3;
+    int32 no = 4;
+    string icon = 5;
+    string route = 6;
+    bool showInMenu = 7;
+  }
+  string id = 1;
+  ParentModuleTreeNode parent = 2;
+  string name = 3;
+  int32 no = 4;
+  string style = 5;
+  string icon = 6;
+  string route = 7;
+  bool showInMenu = 8;
+  repeated ModuleTreeNode children = 9;
+  repeated Page pages = 10;
+}
+
+message GetModuleTreeReply{
+  repeated ModuleTreeNode nodes = 1;
+}
+
+message FindModuleReply{
+  message ParentModule{
+    string id = 1;
+    string name = 2;
+  }
+  message Page{
+    string id = 1;
+    string key = 2;
+    string name = 3;
+    int32 no = 4;
+    string icon = 5;
+    string route = 6;
+    bool showInMenu = 7;
+  }
+  string id = 1;
+  ParentModule parent = 2;
+  string name = 3;
+  int32 no = 4;
+  string style = 5;
+  string icon = 6;
+  string route = 7;
+  bool showInMenu = 8;
+  repeated Page pages = 9;
+}
+

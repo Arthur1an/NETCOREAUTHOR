@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "Protos/infrastructure.proto";
+
+option csharp_namespace = "Soit.Authentication.Protos";
+
+package Soit.Authentication;
+
+service UserService {
+  rpc Create (CreateUserRequest) returns (google.protobuf.StringValue);
+  rpc Remove (RemoveUserRequest) returns (google.protobuf.Empty);
+  rpc Update (UpdateUserRequest) returns (google.protobuf.Empty);
+  rpc Query (QueryUserRequest) returns (QueryUserReply);
+  rpc Find (google.protobuf.StringValue) returns (FindUserReply);
+  rpc UpdateName (UpdateUserNameRequest) returns (google.protobuf.Empty);
+  rpc ResetPassword (ResetPasswordRequest) returns (google.protobuf.Empty);
+  rpc UpdatePassword (UpdatePasswordRequest) returns (google.protobuf.Empty);
+  rpc UpdateRoles (UpdateUserRolesRequest)returns (google.protobuf.Empty);
+  rpc UpdateOrganizations (UpdateUserOrganizationsRequest) returns (google.protobuf.Empty);
+  rpc UpdateStates (UpdateUserStatesRequest) returns (google.protobuf.Empty);
+}
+
+message CreateUserRequest
+{
+  string name = 1;
+  string cipher = 2;
+  google.protobuf.StringValue legalName = 3;
+  google.protobuf.StringValue description = 4;
+  google.protobuf.StringValue mobile = 5;
+  google.protobuf.StringValue phone = 6;
+  google.protobuf.StringValue email = 7;
+  google.protobuf.StringValue photo = 8;
+  Soit.Infrastructure.EntityStates state = 9;
+  repeated string organizationIds = 10;
+  repeated string roleIds = 11;
+}
+
+message RemoveUserRequest{
+  repeated string ids = 1;
+}
+
+message UpdateUserRequest
+{
+  string id = 1;
+  google.protobuf.StringValue legalName = 2;
+  google.protobuf.StringValue description = 3;
+  google.protobuf.StringValue mobile = 4;
+  google.protobuf.StringValue phone = 5;
+  google.protobuf.StringValue email = 6;
+  google.protobuf.StringValue photo = 7;
+  Soit.Infrastructure.EntityStates state = 8;
+  repeated string organizationIds = 9;
+  repeated string roleIds = 10;
+}
+
+message QueryUserRequest
+{
+  string contains = 1;
+  Soit.Infrastructure.OrderRequest orderRequest = 2;
+  Soit.Infrastructure.PageRequest pageRequest = 3;
+}
+
+message QueryUserReply
+{
+  Soit.Infrastructure.PageResult pageResult = 1;
+  repeated FindUserReply items = 2;
+}
+
+message FindUserReply
+{
+  string id = 1;
+  string name = 2;
+  string cipher = 3;
+  google.protobuf.StringValue legalName = 4;
+  google.protobuf.StringValue description = 5;
+  google.protobuf.StringValue mobile = 6;
+  google.protobuf.StringValue phone = 7;
+  google.protobuf.StringValue email = 8;
+  google.protobuf.StringValue photo = 9;
+  Soit.Infrastructure.EntityStates state = 10;
+  message Role{
+    string id = 1;
+    string name = 2;
+  }
+  repeated Role roles = 11;
+  message Organization{
+    string id = 1;
+    string name = 2;
+  }
+  repeated Organization organizations = 12;
+}
+
+message UpdateUserNameRequest{
+  string id = 1;
+  string name = 2;
+}
+
+message ResetPasswordRequest{
+  repeated string ids = 1;
+}
+
+message UpdatePasswordRequest{
+  string oldCipher = 1;
+  string newCipher = 2;
+}
+
+message UpdateUserRolesRequest{
+  string id = 1;
+  repeated string roleIds = 2;
+}
+
+message UpdateUserOrganizationsRequest{
+  string id = 1;
+  repeated string organizationIds = 2;
+}
+
+message UpdateUserStatesRequest{
+  repeated string ids = 1;
+  Soit.Infrastructure.EntityStates state = 2;
+}

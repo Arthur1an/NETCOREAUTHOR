@@ -23,7 +23,7 @@ namespace NETCOREAUTHOR.Controllers
             {
                 using var channel = GrpcChannel.ForAddress("https://localhost:5001");
                 var clien_num = new AuthenticateService.AuthenticateServiceClient(channel);// new GrpcGreeter.Greeter.GreeterClient(channel);
-                if (string.IsNullOrEmpty(Cipher))
+                if (Cipher=="1")
                     Cipher = @"FvY6RlVZ9luQN7J/GOGYr0kar2myC5rZ2TFVz6x/k9eMIVQ2+VkYT5pfACOHymTPUKGrlw/WI6P3/Ri2h2V3A9zBWcv6J8AeY4mbqpNm9AZ/Uq/bOGInt9MbZibaSThuJABX1crFuPF0bOIjsmZSuHGueAL1/sWpSSJv/MrT31U=";
                 Metadata metadata = new Metadata();
                 metadata.Add("token", Token);

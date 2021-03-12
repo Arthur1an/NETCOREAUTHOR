@@ -21,7 +21,7 @@
                     alert("error")
                 } else {
                     alert("success")
-                    window.location.href = 'https://www.baidu.com/';
+                    window.location.href = "/module/GetTree?token=" + result;
                 }
             },
             error: function (error) {
@@ -30,15 +30,15 @@
         })
     }
 </script>
-@*<body>
+<body>
     <div id="login">
         <h1>Login</h1>
         <input type="text" required="required" placeholder="用户名" name="UserName" id="UserName">
         <input type="password" required="required" placeholder="密码" name="Cipher" id="Cipher">
         <button class="but" type="submit" onclick="login()">登录</button>
     </div>
-</body>*@
-<body>
+</body>
+@*<body>
     <div id="login">
         <h1>Login</h1>
         <form method="post" action="/authenticate/Login">
@@ -47,4 +47,4 @@
             <button class="but" type="submit">登录</button>
         </form>
     </div>
-</body>
+</body>*@
